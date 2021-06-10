@@ -11,11 +11,11 @@ export default function Header(props) {
     <ImageBackground
       source={require('../assets/backgrounds/headerbg.png')}
       style={styles.headerBg}>
-      <View style={styles.header}>
+      <View style={[styles.header,{marginTop: title === 'Form' ? 20: null}]}>
         <Icon name={'arrowleft'} style={styles.IconHeader} onPress={()=> navigation.navigate(arrowBack)} />
         <Text style={styles.HeaderText}>{title}</Text>
-        <TouchableOpacity style={styles.btnHeader} onPress={nextbtn}>
-          <Text style={styles.btnTextHeader}>{'Next'}</Text>
+        <TouchableOpacity style={title === 'Form' ? null: styles.btnHeader} onPress={nextbtn}>
+          <Text style={title === 'Form' ? {color: 'transparent'} : styles.btnTextHeader}>{'Next'}</Text>
         </TouchableOpacity>
       </View>
     </ImageBackground>

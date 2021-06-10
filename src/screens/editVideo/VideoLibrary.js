@@ -15,28 +15,9 @@ import ImagePicker from 'react-native-image-crop-picker';
 import CameraRoll from '@react-native-community/cameraroll';
 import Icon from 'react-native-vector-icons/AntDesign';
 
-import styles from '../styleSheet/Style';
-import Header from '../components/Header';
+import styles from '../../styleSheet/Style';
+import Header from '../../components/Header';
 
-let Images = [
-  {img: require('../assets/gallery/Artistphoto.png')},
-  {img: require('../assets/gallery/Artistphoto2.png')},
-  {img: require('../assets/gallery/Artistphoto3.png')},
-  {img: require('../assets/gallery/Artistphoto.png')},
-  {img: require('../assets/gallery/Artistphoto2.png')},
-  {img: require('../assets/gallery/Artistphoto3.png')},
-  {img: require('../assets/gallery/Artistphoto.png')},
-  {img: require('../assets/gallery/Artistphoto2.png')},
-  {img: require('../assets/gallery/Artistphoto3.png')},
-  {img: require('../assets/gallery/Artistphoto.png')},
-  {img: require('../assets/gallery/Artistphoto2.png')},
-  {img: require('../assets/gallery/Artistphoto3.png')},
-  {img: require('../assets/gallery/Artistphoto.png')},
-  {img: require('../assets/gallery/Artistphoto2.png')},
-  {img: require('../assets/gallery/Artistphoto3.png')},
-  {img: require('../assets/gallery/Artistphoto.png')},
-  {img: require('../assets/gallery/Artistphoto2.png')},
-];
 const VideoLibrary = props => {
   let {navigation} = props;
   const [video, setVideo] = useState();
@@ -113,18 +94,6 @@ const VideoLibrary = props => {
 
       <ScrollView>
         <View style={styles.gallerImages}>
-          {/* <FlatList
-        data={video}
-        renderItem={({item}) => (
-          <>
-          <Image
-           style={styles.Imagegallery}
-            source={{uri: item.node.image.uri}}
-          />
-          <Text>{item.node.group_name}</Text>
-          </>
-        )}
-      /> */}
           {video &&
             video.map((item, index) => {
               return (

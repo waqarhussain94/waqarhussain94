@@ -8,10 +8,10 @@ import {
   ScrollView,
 } from 'react-native';
 
-import styles from '../styleSheet/Style';
-import Header from '../components/Header';
-import Button from '../components/Button';
-import Video from '../components/Video';
+import styles from '../../styleSheet/Style';
+import Header from '../../components/Header';
+import Button from '../../components/Button';
+import Video from '../../components/Video';
 
 const Form = props => {
   let {navigation, route} = props;
@@ -40,7 +40,7 @@ const Form = props => {
         />
         <View style={styles.clientContainer}>
           <Image
-            source={require('../assets/icons/delete.png')}
+            source={require('../../assets/icons/delete.png')}
             style={[styles.iconImage, {margin: 5, alignSelf: 'flex-end'}]}
           />
           <TextInput placeholder="Customer" style={styles.inputform} />
@@ -48,7 +48,7 @@ const Form = props => {
         </View>
         <View style={styles.clientAddbtn}>
           <Image
-            source={require('../assets/icons/add-user.png')}
+            source={require('../../assets/icons/add-user.png')}
             style={[styles.iconImage, {margin: 5}]}
           />
           <Text>Add Client</Text>

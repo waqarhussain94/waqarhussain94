@@ -11,9 +11,9 @@ import {Picker} from '@react-native-picker/picker';
 import RNMediaEditor from 'react-native-media-editor';
 // import Video from 'react-native-video';
 
-import Video from '../components/Video';
-import styles from '../styleSheet/Style';
-import Header from '../components/Header';
+import Video from '../../components/Video';
+import styles from '../../styleSheet/Style';
+import Header from '../../components/Header';
 
 const colors = [
   {colorName: '#50A1FF'},

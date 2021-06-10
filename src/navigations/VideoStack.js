@@ -3,13 +3,13 @@ import * as React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 
-import VideoLibrary from '../screens/VideoLibrary';
-import VideoSharing from '../screens/VideoSharing';
-import EditVideo from '../screens/EditVideo';
-import VideoTemplate from '../screens/VideoTemplate';
-import AddText from '../screens/AddText';
-import AddStyle from '../screens/AddStyle';
-import Form from '../screens/Form';
+import VideoLibrary from '../screens/editVideo/VideoLibrary';
+import VideoSharing from '../screens/editVideo/VideoSharing';
+import EditVideo from '../screens/editVideo/EditVideo';
+import VideoTemplate from '../screens/editVideo/VideoTemplate';
+import AddText from '../screens/editVideo/AddText';
+import AddStyle from '../screens/editVideo/AddStyle';
+import Form from '../screens/editVideo/Form';
 
 const Stack = createStackNavigator();
 
