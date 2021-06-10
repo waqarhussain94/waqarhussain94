@@ -1,11 +1,13 @@
-import React, {useState} from 'react';
+import React, {useState, useRef} from 'react';
 import {View, Text, Image, TouchableOpacity, ScrollView} from 'react-native';
 
 import styles from '../styleSheet/Style';
 import Header from '../components/Header';
+import Video from '../components/Video';
 
 const AddStyle = props => {
-  let {navigation} = props;
+  let {navigation, route} = props;
+  const video = route.params.videoData;
 
   function renderIcon(title, img, ftn) {
     return (
@@ -24,13 +26,14 @@ const AddStyle = props => {
         navigation={navigation}
         arrowBack={'addtext'}
         title="Add Style"
-        nextbtn="videosharing"
+        nextbtn={() => navigation.navigate('videosharing', {videoData: video})}
       />
       <ScrollView style={{margin: 20}}>
-        <Image
-          source={require('../assets/gallery/edit.png')}
-          style={styles.videoImage}
-        />
+        {video && (
+          <Video
+            videoUri={video} // Can be a URL or a local file.
+          />
+        )}
         <Text style={styles.centerText}>Edit Style</Text>
         <View style={styles.lineRow}>
           {renderIcon(

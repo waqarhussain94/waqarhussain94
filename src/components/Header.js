@@ -14,7 +14,7 @@ export default function Header(props) {
       <View style={styles.header}>
         <Icon name={'arrowleft'} style={styles.IconHeader} onPress={()=> navigation.navigate(arrowBack)} />
         <Text style={styles.HeaderText}>{title}</Text>
-        <TouchableOpacity style={styles.btnHeader} onPress={()=> navigation.navigate(nextbtn)}>
+        <TouchableOpacity style={styles.btnHeader} onPress={nextbtn}>
           <Text style={styles.btnTextHeader}>{'Next'}</Text>
         </TouchableOpacity>
       </View>

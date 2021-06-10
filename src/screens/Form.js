@@ -11,9 +11,11 @@ import {
 import styles from '../styleSheet/Style';
 import Header from '../components/Header';
 import Button from '../components/Button';
+import Video from '../components/Video';
 
 const Form = props => {
-  let {navigation} = props;
+  let {navigation, route} = props;
+  const video = route.params.videoData;
 
   return (
     <View style={styles.galleryContainer}>
@@ -24,10 +26,11 @@ const Form = props => {
         nextbtn="login"
       />
       <ScrollView style={{margin: 20}}>
-        <Image
-          source={require('../assets/gallery/edit.png')}
-          style={styles.videoImage}
-        />
+        {video && (
+          <Video
+            videoUri={video} // Can be a URL or a local file.
+          />
+        )}
         <TextInput placeholder="Subject" style={styles.inputform} />
         <TextInput
           multiline={true}

@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useRef} from 'react';
 import {
   View,
   Text,
@@ -8,7 +8,10 @@ import {
   ScrollView,
 } from 'react-native';
 import {Picker} from '@react-native-picker/picker';
+import RNMediaEditor from 'react-native-media-editor';
+// import Video from 'react-native-video';
 
+import Video from '../components/Video';
 import styles from '../styleSheet/Style';
 import Header from '../components/Header';
 
@@ -23,9 +26,12 @@ const colors = [
   {colorName: '#5DBDCD'},
 ];
 const AddText = props => {
-  let {navigation} = props;
+  let {navigation, route} = props;
+  const video = route.params.videoData;
+  const VideoPlayer = useRef(null);
   const [selectedLanguage, setSelectedLanguage] = useState();
   const [selectedColor, setColor] = useState('#1AD5AC');
+  const [text, setText] = useState(null);
 
   function renderColor(name, ftn) {
     return (
@@ -45,6 +51,7 @@ const AddText = props => {
   function renderbtn(name, ftn) {
     return (
       <TouchableOpacity
+        onPress={ftn}
         style={[
           styles.btn,
           {
@@ -63,20 +70,55 @@ const AddText = props => {
     );
   }
 
+  function onEmbedButtonPress() {
+    console.log('embed text on video');
+    const options = {
+      path: video,
+      type: 'video',
+      firstText: {
+        left: 200,
+        top: 200,
+        backgroundOpacity: 0.5,
+        text: text,
+        fontSize: 23,
+        textColor: selectedColor,
+        backgroundColor: 'rgba(0, 0, 0, 0.4)',
+      },
+    };
+    console.log('embed text on video',RNMediaEditor,RNMediaEditor.embedTextOnVideo);
+
+    // RNMediaEditor.embedTextOnVideo(options)
+    //   .then(res => {
+    //     console.log('rrrrrr',res);
+    //   })
+    //   .catch(err => {
+    //     console.log('errrrrr',err);
+    //   });
+  }
+
   return (
     <View style={styles.galleryContainer}>
       <Header
         navigation={navigation}
         arrowBack={'editvideo'}
         title="Add Text"
-        nextbtn="addstyle"
+        nextbtn={() => navigation.navigate('addstyle', {videoData: video})}
       />
       <ScrollView style={{margin: 20}}>
         <View>
-          <Image
-            source={require('../assets/gallery/edit.png')}
-            style={styles.videoImage}
-          />
+          {video && (
+             <Video
+             videoUri={video} // Can be a URL or a local file.
+           />
+            // <Video
+            //   source={{uri: video}} // Can be a URL or a local file.
+            //   ref={VideoPlayer} // Store reference
+            //   style={styles.videoImage}
+            //   paused={false}
+            //   resizeMode={'cover'}
+            //   controls={true}
+            // />
+          )}
           <TextInput
             style={[
               styles.inputText,
@@ -84,6 +126,8 @@ const AddText = props => {
             ]}
             placeholderTextColor={selectedColor}
             placeholder="ADD YOUR TEXT HERE"
+            onValueChange={text => setText(text)}
+            value={text}
           />
         </View>
         <Text style={styles.fontText}>Font Style</Text>
@@ -104,7 +148,7 @@ const AddText = props => {
 
         <View style={styles.lineRow}>
           {renderbtn('Reset', () => console.log('rest'))}
-          {renderbtn('Done', () => console.log('Done'))}
+          {renderbtn('Done', () => onEmbedButtonPress())}
         </View>
       </ScrollView>
     </View>

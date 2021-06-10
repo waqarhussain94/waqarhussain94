@@ -115,6 +115,7 @@ export default StyleSheet.create({
     width: screenWidth * 0.22,
     height: screenWidth * 0.22,
     margin: 5,
+    borderRadius: 8,
   },
   //Video Edit styles
   videoImage: {
@@ -254,5 +255,25 @@ export default StyleSheet.create({
     color: Color.ColorWhite,
     fontSize: 25,
     textTransform: 'uppercase',
+  },
+  //Videos
+
+  control: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-around',
+    paddingHorizontal: 10,
+    position: 'absolute',
+    left: 0,
+    bottom: 0,
+    right: 0,
+    backgroundColor: 'rgba(20, 15, 38, 0.648579)',
+  },
+  mainBtn: {
+    marginRight: 15,
+  },
+  duration: {
+    color: '#FFF',
+    marginLeft: 15,
   },
 });

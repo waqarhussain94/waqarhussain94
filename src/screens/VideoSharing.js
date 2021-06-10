@@ -11,9 +11,11 @@ import {
 import styles from '../styleSheet/Style';
 import Header from '../components/Header';
 import Button from '../components/Button';
+import Video from '../components/Video';
 import {Color} from '../utils/Color';
 const VideoSharing = props => {
-  let {navigation} = props;
+  let {navigation, route} = props;
+  const video = route.params.videoData;
 
   function renderSocialIcon(img, ftn) {
     return (
@@ -29,13 +31,15 @@ const VideoSharing = props => {
         navigation={navigation}
         arrowBack={'addstyle'}
         title="Video Sharing"
-        nextbtn="form"
+        nextbtn={() => navigation.navigate('form', {videoData: video})}
+        // nextbtn="form"
       />
       <ScrollView style={{margin: 20}}>
-        <Image
-          source={require('../assets/gallery/edit.png')}
-          style={styles.videoImage}
-        />
+        {video && (
+          <Video
+            videoUri={video} // Can be a URL or a local file.
+          />
+        )}
         <Text style={styles.centerText}>Share on Social media</Text>
         <View style={styles.lineRow}>
           {renderSocialIcon(require('../assets/social/in.png'), () =>
