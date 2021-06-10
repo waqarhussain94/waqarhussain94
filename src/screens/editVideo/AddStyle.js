@@ -1,9 +1,9 @@
 import React, {useState, useRef} from 'react';
 import {View, Text, Image, TouchableOpacity, ScrollView} from 'react-native';
 
-import styles from '../styleSheet/Style';
-import Header from '../components/Header';
-import Video from '../components/Video';
+import styles from '../../styleSheet/Style';
+import Header from '../../components/Header';
+import Video from '../../components/Video';
 
 const AddStyle = props => {
   let {navigation, route} = props;
@@ -38,15 +38,15 @@ const AddStyle = props => {
         <View style={styles.lineRow}>
           {renderIcon(
             'Color Filter',
-            require('../assets/icons/contrast.png'),
+            require('../../assets/icons/contrast.png'),
             () => console.log('hello'),
           )}
           {renderIcon(
             'Contrast',
-            require('../assets/icons/brightness.png'),
+            require('../../assets/icons/brightness.png'),
             () => console.log('hello'),
           )}
-          {renderIcon('Brightness', require('../assets/icons/rgb.png'), () =>
+          {renderIcon('Brightness', require('../../assets/icons/rgb.png'), () =>
             console.log('hello'),
           )}
         </View>

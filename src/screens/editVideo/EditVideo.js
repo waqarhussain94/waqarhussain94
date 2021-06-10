@@ -11,15 +11,21 @@ import Video from 'react-native-video';
 import {createThumbnail} from 'react-native-create-thumbnail';
 import Icon from 'react-native-vector-icons/AntDesign';
 import * as Progress from 'react-native-progress';
+import {
+  VESDK,
+  VideoEditorModal,
+  Configuration,
+  TintMode,
+} from 'react-native-videoeditorsdk';
 
-import styles from '../styleSheet/Style';
-import Header from '../components/Header';
+import styles from '../../styleSheet/Style';
+import Header from '../../components/Header';
 
 const EditVideo = props => {
   let {navigation, route} = props;
   const video = route.params.videoData;
   const VideoPlayer = useRef(null);
-  const [videoImg, setVideoImg] = useState();
+  const [videoImg, setVideoImg] = useState(null);
   const [seconds, setSeconds] = useState(0);
   const [paused, setPaused] = useState(false);
   const [duration, setDuration] = useState(0);
@@ -41,7 +47,9 @@ const EditVideo = props => {
   });
 
   function secondsToTime(time) {
-    return Math.floor(time / 60 + ':' + (time % 60 < 10 ? '0' : '') + (time % 60));
+    return Math.floor(
+      time / 60 + ':' + (time % 60 < 10 ? '0' : '') + (time % 60),
+    );
   }
   function renderIcon(img, ftn) {
     return (
@@ -66,7 +74,7 @@ const EditVideo = props => {
   const OnProgress = async res => {
     // await setSeconds(res.currentTime * 1000);
     setProgress(res.currentTime / duration);
-    console.log('progress', res);
+    // console.log('progress', res);
     // if(seconds < video.duration){
     // await  createThumbnail({
     //     url: video.path,
@@ -100,23 +108,83 @@ const EditVideo = props => {
     VideoPlayer.onSeek(progress);
   };
   // console.log(route)
+  const openEditor = () => {
+    // Set up sample video
+    // let video = video;
+    // Set up configuration
+    let configuration = {
+      // Configure sticker tool
+      sticker: {
+        // Enable personal stickers
+        personalStickers: true,
+        // Configure stickers
+        categories: [
+          // Create sticker category with stickers
+          {
+            identifier: 'example_sticker_category_logos',
+            name: 'Logos',
+            // thumbnailURI: require('./assets/React-Logo.png'),
+            items: [
+              {
+                identifier: 'example_sticker_logos_react',
+                name: 'React',
+                // stickerURI: require('./assets/React-Logo.png'),
+              },
+              {
+                identifier: 'example_sticker_logos_imgly',
+                name: 'img.ly',
+                // stickerURI: require('./assets/imgly-Logo.png'),
+                tintMode: TintMode.SOLID,
+              },
+            ],
+          },
+          // Reorder and use existing sticker categories
+          {identifier: 'imgly_sticker_category_animated'},
+          {identifier: 'imgly_sticker_category_emoticons'},
+          // Modify existing sticker category
+          {
+            identifier: 'imgly_sticker_category_shapes',
+            items: [
+              {identifier: 'imgly_sticker_shapes_badge_01'},
+              {identifier: 'imgly_sticker_shapes_arrow_02'},
+              {identifier: 'imgly_sticker_shapes_spray_03'},
+            ],
+          },
+        ],
+      },
+    };
+    VESDK.openEditor(videoImg !== null ? videoImg : video, configuration).then(
+      result => {
+        setVideoImg(result.video);
+        console.log('yess', result);
+      },
+      error => {
+        console.log(error);
+      },
+    );
+  };
   return (
     <View style={styles.galleryContainer}>
       <Header
         navigation={navigation}
         arrowBack={'videolibrary'}
         title="Edit Video"
-        nextbtn={() => navigation.navigate('videotemplate', {videoData: video})}
+        nextbtn={() =>
+          navigation.navigate('videosharing', {
+            videoData: videoImg !== null ? videoImg : video,
+          })
+        }
       />
       <ScrollView>
         {/* <Image
           source={require('../assets/gallery/edit.png')}
           style={styles.videoImage}
         /> */}
+        {/* <VideoEditorModal visible={true} video={{uri: video}} /> */}
         {video && (
           <View>
             <Video
-              source={{uri: video}} // Can be a URL or a local file.
+              source={{uri: videoImg !== null ? videoImg : video}} // Can be a URL or a local file.
               ref={VideoPlayer} // Store reference
               //  onBuffer={this.onBuffer}                // Callback when remote video is buffering
               //  onError={this.videoError}
@@ -156,37 +224,36 @@ const EditVideo = props => {
           </View>
         )}
         <View style={styles.lineRow}>
-          {renderIcon(require('../assets/icons/T.png'), () =>
-            console.log('hello'),
+          {renderIcon(require('../../assets/icons/T.png'), () => openEditor())}
+          {renderIcon(require('../../assets/icons/copy.png'), () =>
+            openEditor(),
           )}
-          {renderIcon(require('../assets/icons/copy.png'), () =>
-            console.log('hello'),
+          {renderIcon(require('../../assets/icons/expand.png'), () =>
+            openEditor(),
           )}
-          {renderIcon(require('../assets/icons/expand.png'), () =>
-            console.log('hello'),
-          )}
-          {renderIcon(require('../assets/icons/duration.png'), () =>
-            console.log('hello'),
+          {renderIcon(require('../../assets/icons/duration.png'), () =>
+            openEditor(),
           )}
           {/*  <Icon name={'home'} style={[styles.IconImage,{backgroundColor: '#1AD5AC', padding: 10, borderRadius: 25}]} /> */}
         </View>
         <View style={styles.lineRow}>
           <Image
-            source={require('../assets/gallery/edit.png')}
+            source={require('../../assets/gallery/edit.png')}
             style={styles.smallImg}
           />
-          {renderplusIcon(require('../assets/icons/+.png'), () =>
-            console.log('hello'),
-          )}
-          <Image 
-          // source={{uri: videoImg}} 
-          source={require('../assets/gallery/edit.png')}
-          style={styles.mediumImg} />
-          {renderplusIcon(require('../assets/icons/+.png'), () =>
+          {renderplusIcon(require('../../assets/icons/+.png'), () =>
             console.log('hello'),
           )}
           <Image
-            source={require('../assets/gallery/edit.png')}
+            // source={{uri: videoImg}}
+            source={require('../../assets/gallery/edit.png')}
+            style={styles.mediumImg}
+          />
+          {renderplusIcon(require('../../assets/icons/+.png'), () =>
+            console.log('hello'),
+          )}
+          <Image
+            source={require('../../assets/gallery/edit.png')}
             style={styles.smallImg}
           />
         </View>

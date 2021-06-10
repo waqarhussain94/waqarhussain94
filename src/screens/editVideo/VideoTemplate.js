@@ -2,34 +2,34 @@ import React, {useState, useRef} from 'react';
 import {View, Image, TouchableOpacity, Text, ScrollView} from 'react-native';
 // import Video from 'react-native-video';
 
-import styles from '../styleSheet/Style';
-import Header from '../components/Header';
-import Video from '../components/Video';
+import styles from '../../styleSheet/Style';
+import Header from '../../components/Header';
+import Video from '../../components/Video';
 
 let templates = [
   {
-    img: require('../assets/templates/Kids-Party-Snapchat-Geofilters-Template.png'),
+    img: require('../../assets/templates/Kids-Party-Snapchat-Geofilters-Template.png'),
   },
   {
-    img: require('../assets/templates/Bridal-Shower-Snapchat-Geofilters-Template.png'),
+    img: require('../../assets/templates/Bridal-Shower-Snapchat-Geofilters-Template.png'),
   },
   {
-    img: require('../assets/templates/Birthday-Snapchat-Geofilters-Template.png'),
+    img: require('../../assets/templates/Birthday-Snapchat-Geofilters-Template.png'),
   },
   {
-    img: require('../assets/templates/Bachelorette-Snapchat-Geofilters-Template.png'),
+    img: require('../../assets/templates/Bachelorette-Snapchat-Geofilters-Template.png'),
   },
   {
-    img: require('../assets/templates/Kids-Party-Snapchat-Geofilters-Template.png'),
+    img: require('../../assets/templates/Kids-Party-Snapchat-Geofilters-Template.png'),
   },
   {
-    img: require('../assets/templates/Bridal-Shower-Snapchat-Geofilters-Template.png'),
+    img: require('../../assets/templates/Bridal-Shower-Snapchat-Geofilters-Template.png'),
   },
   {
-    img: require('../assets/templates/Birthday-Snapchat-Geofilters-Template.png'),
+    img: require('../../assets/templates/Birthday-Snapchat-Geofilters-Template.png'),
   },
   {
-    img: require('../assets/templates/Bachelorette-Snapchat-Geofilters-Template.png'),
+    img: require('../../assets/templates/Bachelorette-Snapchat-Geofilters-Template.png'),
   },
 ];
 const VideoTemplate = props => {
