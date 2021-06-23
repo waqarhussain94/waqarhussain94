@@ -3,7 +3,7 @@ import {
   View,
   Image,
   TouchableOpacity,
-  Text,
+  Text,SafeAreaView,
   ScrollView,
   TouchableWithoutFeedback,
 } from 'react-native';
@@ -32,7 +32,7 @@ const EditVideo = props => {
   const [progress, setProgress] = useState(0);
 
   useEffect(() => {
-    // if (seconds < video.duration) {
+     // if (seconds < video.duration) {
     //   // setSeconds(seconds + 1000)
     //   createThumbnail({
     //     url: video.path,
@@ -164,14 +164,14 @@ const EditVideo = props => {
     );
   };
   return (
-    <View style={styles.galleryContainer}>
+    <SafeAreaView style={styles.galleryContainer}>
       <Header
         navigation={navigation}
         arrowBack={'videolibrary'}
         title="Edit Video"
         nextbtn={() =>
           navigation.navigate('videosharing', {
-            videoData: videoImg !== null ? videoImg : video,
+            //videoData: videoImg !== null ? videoImg : video,
           })
         }
       />
@@ -184,7 +184,7 @@ const EditVideo = props => {
         {video && (
           <View>
             <Video
-              source={{uri: videoImg !== null ? videoImg : video}} // Can be a URL or a local file.
+             source={{uri: video}} // Can be a URL or a local file.
               ref={VideoPlayer} // Store reference
               //  onBuffer={this.onBuffer}                // Callback when remote video is buffering
               //  onError={this.videoError}
@@ -258,7 +258,7 @@ const EditVideo = props => {
           />
         </View>
       </ScrollView>
-    </View>
+    </SafeAreaView>
   );
 };
 
